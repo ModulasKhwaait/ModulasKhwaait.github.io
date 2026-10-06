@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lomus Khatiwada — Data Engineer Character Sheet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --obsidian:#0a0805;--stone-dark:#110e0a;--stone-light:#2a211a;
+      --parchment:#c8a96e;--gold:#d4a843;--gold-bright:#f0c060;--ember:#c44a1a;
+      --crimson:#8b1a1a;--bone:#e8dcc8;--ash:#9a8a78;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background-color:var(--obsidian);color:var(--bone);font-family:'Crimson Text',Georgia,serif;font-size:18px;line-height:1.6;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(139,26,26,.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(196,74,26,.05) 0%,transparent 50%);pointer-events:none;z-index:0}
+    nav{position:fixed;top:0;width:100%;z-index:100;background:linear-gradient(to bottom,rgba(10,8,5,.97),rgba(10,8,5,.8));border-bottom:1px solid rgba(212,168,67,.2);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px}
+    .nav-brand{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;color:var(--ash);text-decoration:none;text-transform:uppercase;transition:color .2s}
+    .nav-links a:hover{color:var(--gold)}
+    .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 2rem 4rem;text-align:center}
+    .hero::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,var(--crimson),var(--ember),transparent);opacity:.6}
+    .hero::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,var(--crimson),var(--ember),transparent);opacity:.6}
+    .class-badge{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.35em;color:var(--ember);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+    .class-badge::before,.class-badge::after{content:'';display:block;width:40px;height:1px;background:var(--ember)}
+    .hero-name{font-family:'Cinzel',serif;font-size:clamp(2.4rem,7vw,5.5rem);font-weight:900;color:var(--gold-bright);letter-spacing:.05em;line-height:1;text-shadow:0 0 40px rgba(212,168,67,.4),0 0 80px rgba(196,74,26,.2);margin-bottom:.5rem}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(.7rem,1.8vw,1rem);font-weight:400;color:var(--parchment);letter-spacing:.18em;text-transform:uppercase;margin-bottom:2.5rem}
+    .level-orb{position:relative;width:140px;height:140px;margin:0 auto 2.5rem}
+    .level-orb svg{width:100%;height:100%;filter:drop-shadow(0 0 20px rgba(212,168,67,.5)) drop-shadow(0 0 40px rgba(196,74,26,.3))}
+    .level-orb-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .level-label{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.3em;color:var(--ash);text-transform:uppercase}
+    .level-number{font-family:'Cinzel',serif;font-size:2.8rem;font-weight:900;color:var(--gold-bright);line-height:1}
+    .level-max{font-family:'Cinzel',serif;font-size:.55rem;color:var(--ash)}
+    .xp-section{width:100%;max-width:500px;margin:0 auto 2rem}
+    .xp-label-row{display:flex;justify-content:space-between;margin-bottom:.4rem}
+    .xp-label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;color:var(--ash);text-transform:uppercase}
+    .xp-bar-track{height:10px;background:var(--stone-light);border:1px solid rgba(212,168,67,.2);border-radius:2px;overflow:hidden}
+    .xp-bar-fill{height:100%;background:linear-gradient(to right,var(--crimson),var(--ember),var(--gold));border-radius:2px;animation:xpPulse 3s ease-in-out infinite;position:relative}
+    .xp-bar-fill::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:linear-gradient(to right,transparent,rgba(255,255,255,.3));animation:shimmer 2s ease-in-out infinite}
+    @keyframes xpPulse{0%,100%{box-shadow:0 0 6px rgba(196,74,26,.4)}50%{box-shadow:0 0 14px rgba(212,168,67,.6)}}
+    @keyframes shimmer{0%,100%{opacity:0}50%{opacity:1}}
+    .xp-next{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--ash);margin-top:.4rem;text-align:right}
+    .hero-tagline{font-size:1.1rem;color:var(--ash);font-style:italic;max-width:540px;margin:0 auto 2rem}
+    .scroll-hint{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.3em;color:rgba(154,138,120,.5);text-transform:uppercase;animation:fadeUpDown 2s ease-in-out infinite}
+    @keyframes fadeUpDown{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:1}}
+
+    /* impact banner */
+    .impact-row{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem;margin:0 auto 2.5rem;max-width:680px}
+    .impact-stat{text-align:center}
+    .impact-num{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:900;color:var(--gold-bright);display:block;text-shadow:0 0 20px rgba(212,168,67,.3)}
+    .impact-lbl{font-family:'Share Tech Mono',monospace;font-size:.55rem;color:var(--ash);letter-spacing:.1em;text-transform:uppercase}
+
+    section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:5rem 2rem}
+    .section-header{display:flex;align-items:center;gap:1rem;margin-bottom:3rem}
+    .section-icon{font-size:1.4rem;line-height:1}
+    .section-title{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+    .section-rule{flex:1;height:1px;background:linear-gradient(to right,rgba(212,168,67,.4),transparent)}
+    .section-divider{position:relative;z-index:1;height:1px;max-width:1100px;margin:0 auto;background:linear-gradient(to right,transparent,rgba(212,168,67,.15),transparent)}
+
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+    .stat-card{background:var(--stone-dark);border:1px solid rgba(212,168,67,.15);border-radius:3px;padding:1.5rem;position:relative;overflow:hidden;transition:border-color .3s,transform .2s}
+    .stat-card:hover{border-color:rgba(212,168,67,.4);transform:translateY(-2px)}
+    .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--crimson),var(--ember));opacity:0;transition:opacity .3s}
+    .stat-card:hover::before{opacity:1}
+    .stat-name-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.7rem}
+    .stat-name{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;color:var(--parchment);text-transform:uppercase}
+    .stat-value{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--gold)}
+    .stat-bar-track{height:6px;background:var(--stone-light);border-radius:2px;overflow:hidden;margin-bottom:.5rem}
+    .stat-bar-fill{height:100%;background:linear-gradient(to right,var(--crimson),var(--gold));border-radius:2px;transition:width 1.2s ease}
+    .stat-desc{font-size:.8rem;color:var(--ash);font-style:italic;line-height:1.4}
+
+    .equipment-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:1rem}
+    .gear-slot{background:var(--stone-dark);border:1px solid rgba(212,168,67,.12);border-radius:3px;padding:1.2rem 1rem;text-align:center;transition:border-color .3s,background .3s}
+    .gear-slot:hover{border-color:rgba(212,168,67,.35);background:rgba(28,22,16,.8)}
+    .gear-icon{font-size:2rem;display:block;margin-bottom:.6rem}
+    .gear-name{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.12em;color:var(--parchment);text-transform:uppercase;display:block;margin-bottom:.4rem}
+    .gear-tier{font-family:'Share Tech Mono',monospace;font-size:.58rem;padding:.15rem .5rem;border-radius:2px;display:inline-block}
+    .tier-mastered{background:rgba(139,26,26,.3);color:#e87070;border:1px solid rgba(139,26,26,.5)}
+    .tier-proficient{background:rgba(180,120,20,.2);color:var(--gold);border:1px solid rgba(180,120,20,.4)}
+    .tier-apprentice{background:rgba(42,33,26,.5);color:var(--ash);border:1px solid rgba(154,138,120,.3)}
+    .tier-locked{background:rgba(20,16,12,.6);color:rgba(154,138,120,.4);border:1px solid rgba(154,138,120,.15);font-style:italic}
+
+    .quest-list{display:flex;flex-direction:column;gap:1.5rem}
+    .quest-card{background:var(--stone-dark);border:1px solid rgba(212,168,67,.12);border-left:3px solid var(--crimson);border-radius:0 3px 3px 0;padding:1.5rem 1.8rem;transition:border-left-color .3s}
+    .quest-card:hover{border-left-color:var(--gold)}
+    .quest-card.featured{border-left-color:var(--gold);background:linear-gradient(135deg,rgba(17,14,10,1) 0%,rgba(28,20,10,1) 100%)}
+    .quest-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem;flex-wrap:wrap;gap:.5rem}
+    .quest-name{font-family:'Cinzel',serif;font-size:.95rem;color:var(--parchment);font-weight:600}
+    .quest-status{font-family:'Share Tech Mono',monospace;font-size:.6rem;padding:.15rem .6rem;border-radius:2px}
+    .status-complete{background:rgba(40,80,40,.3);color:#70c870;border:1px solid rgba(40,140,40,.4)}
+    .status-active{background:rgba(180,120,20,.2);color:var(--gold);border:1px solid rgba(180,120,20,.4);animation:statusPulse 2s ease-in-out infinite}
+    @keyframes statusPulse{0%,100%{opacity:1}50%{opacity:.6}}
+    .quest-desc{font-size:.9rem;color:var(--ash);line-height:1.5;margin-bottom:.8rem}
+    .quest-impact{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.8rem}
+    .impact-pill{font-family:'Share Tech Mono',monospace;font-size:.62rem;padding:.2rem .7rem;border-radius:2px;background:rgba(139,26,26,.2);color:#e87070;border:1px solid rgba(139,26,26,.3)}
+    .quest-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+    .quest-tag{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--ash);background:var(--stone-light);border:1px solid rgba(154,138,120,.2);padding:.1rem .5rem;border-radius:2px}
+
+    .skill-tree{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    @media(max-width:640px){.skill-tree{grid-template-columns:1fr}}
+    .skill-branch{background:var(--stone-dark);border:1px solid rgba(212,168,67,.12);border-radius:3px;padding:1.5rem}
+    .branch-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(212,168,67,.15)}
+    .skill-node{display:flex;align-items:center;gap:.8rem;padding:.5rem 0;border-bottom:1px solid rgba(154,138,120,.08)}
+    .skill-node:last-child{border-bottom:none}
+    .node-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .dot-mastered{background:var(--ember);box-shadow:0 0 6px rgba(196,74,26,.6)}
+    .dot-learning{background:var(--gold);box-shadow:0 0 6px rgba(212,168,67,.4);animation:dotPulse 2s infinite}
+    .dot-locked{background:var(--stone-light);border:1px solid var(--ash)}
+    @keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .node-name{font-size:.88rem;color:var(--bone);flex:1}
+    .node-status{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--ash)}
+
+    .lore-layout{display:grid;grid-template-columns:1fr 260px;gap:2rem;align-items:start}
+    @media(max-width:768px){.lore-layout{grid-template-columns:1fr}}
+    .lore-box{background:var(--stone-dark);border:1px solid rgba(212,168,67,.15);border-radius:3px;padding:2.5rem;position:relative}
+    .lore-box::before{content:'"';position:absolute;top:1rem;left:1.5rem;font-family:'Cinzel',serif;font-size:4rem;color:rgba(212,168,67,.1);line-height:1}
+    .lore-text{font-size:1.05rem;color:var(--ash);line-height:1.8;font-style:italic;position:relative}
+    .lore-text p+p{margin-top:1rem}
+    .lore-text strong{color:var(--parchment);font-style:normal}
+    .char-vitals{background:var(--stone-dark);border:1px solid rgba(212,168,67,.15);border-radius:3px;padding:1.5rem}
+    .vitals-title{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(212,168,67,.15)}
+    .vital-row{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid rgba(154,138,120,.08)}
+    .vital-row:last-child{border-bottom:none}
+    .vital-key{color:var(--ash);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+    .vital-val{color:var(--parchment);font-family:'Share Tech Mono',monospace;font-size:.72rem}
+
+    #contact{text-align:center}
+    .contact-inner{background:var(--stone-dark);border:1px solid rgba(212,168,67,.2);border-radius:3px;padding:3rem 2rem;max-width:600px;margin:0 auto}
+    .contact-title{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:var(--gold-bright);margin-bottom:.8rem}
+    .contact-sub{color:var(--ash);font-style:italic;margin-bottom:2rem;font-size:.95rem}
+    .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+    .contact-link{display:inline-flex;align-items:center;gap:.5rem;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--parchment);text-decoration:none;padding:.7rem 1.5rem;border:1px solid rgba(212,168,67,.3);border-radius:2px;transition:all .25s}
+    .contact-link:hover{background:rgba(212,168,67,.1);border-color:var(--gold);color:var(--gold)}
+    .contact-link.primary{background:rgba(139,26,26,.3);border-color:var(--crimson)}
+    .contact-link.primary:hover{background:rgba(139,26,26,.5);border-color:var(--ember)}
+    footer{position:relative;z-index:1;text-align:center;padding:2rem;border-top:1px solid rgba(212,168,67,.1)}
+    footer p{font-family:'Share Tech Mono',monospace;font-size:.62rem;color:rgba(154,138,120,.4);letter-spacing:.1em}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:640px){.nav-links{display:none}.stats-grid{grid-template-columns:1fr}.equipment-grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">⚔ Lomus Khatiwada</span>
+  <ul class="nav-links">
+    <li><a href="#stats">Stats</a></li>
+    <li><a href="#equipment">Equipment</a></li>
+    <li><a href="#quests">Quest Log</a></li>
+    <li><a href="#skills">Skill Tree</a></li>
+    <li><a href="#lore">Lore</a></li>
+    <li><a href="#contact">Recruit</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="class-badge">Sr. Engineer II · Data Engineering & AI · Healthcare & Finance</div>
+  <h1 class="hero-name">Lomus Khatiwada</h1>
+  <p class="hero-title">Data Warehouse Architect · Pipeline Builder · AI-Assisted Engineering</p>
+
+  <!-- Impact stats banner -->
+  <div class="impact-row">
+    <div class="impact-stat">
+      <span class="impact-num">$180M+</span>
+      <span class="impact-lbl">Bugs Uncovered</span>
+    </div>
+    <div class="impact-stat">
+      <span class="impact-num">15M+</span>
+      <span class="impact-lbl">Emails Parsed</span>
+    </div>
+    <div class="impact-stat">
+      <span class="impact-num">$541M</span>
+      <span class="impact-lbl">Payments Validated</span>
+    </div>
+    <div class="impact-stat">
+      <span class="impact-num">12K</span>
+      <span class="impact-lbl">Catalog Objects</span>
+    </div>
+    <div class="impact-stat">
+      <span class="impact-num">12 yrs</span>
+      <span class="impact-lbl">XP Earned</span>
+    </div>
+  </div>
+
+  <div class="level-orb">
+    <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="70" cy="70" r="66" fill="none" stroke="rgba(212,168,67,0.15)" stroke-width="1"/>
+      <!-- 64% of 364 = 233, offset = 364-233 = 131 -->
+      <circle cx="70" cy="70" r="58" fill="none" stroke="url(#lg)" stroke-width="6" stroke-linecap="round"
+        stroke-dasharray="364" stroke-dashoffset="131" transform="rotate(-90 70 70)"/>
+      <circle cx="70" cy="70" r="50" fill="rgba(10,8,5,0.95)" stroke="rgba(212,168,67,0.08)" stroke-width="1"/>
+      <polygon points="70,4 74,8 70,12 66,8" fill="rgba(212,168,67,0.5)"/>
+      <polygon points="70,128 74,132 70,136 66,132" fill="rgba(212,168,67,0.5)"/>
+      <polygon points="4,70 8,74 12,70 8,66" fill="rgba(212,168,67,0.5)"/>
+      <polygon points="128,70 132,74 136,70 132,66" fill="rgba(212,168,67,0.5)"/>
+      <defs>
+        <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#8b1a1a"/>
+          <stop offset="50%" stop-color="#c44a1a"/>
+          <stop offset="100%" stop-color="#d4a843"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="level-orb-text">
+      <span class="level-label">Level</span>
+      <span class="level-number">64</span>
+      <span class="level-max">/ 100</span>
+    </div>
+  </div>
+
+  <div class="xp-section">
+    <div class="xp-label-row">
+      <span class="xp-label">⚡ XP — Senior Tier</span>
+      <span class="xp-label">LVL 65 ▶</span>
+    </div>
+    <div class="xp-bar-track"><div class="xp-bar-fill" style="width:40%"></div></div>
+    <div class="xp-next">Next milestone: Azure DP-203 · dbt Mastery · Solo cloud architecture build</div>
+  </div>
+
+  <p class="hero-tagline">12 years turning messy enterprise data into operational intelligence. SQL is the weapon. Pipelines are the craft. AI is the force multiplier.</p>
+  <div class="scroll-hint">▼ &nbsp; View Character Sheet &nbsp; ▼</div>
+</div>
+
+<!-- STATS -->
+<div class="section-divider"></div>
+<section id="stats">
+  <div class="section-header">
+    <span class="section-icon">⚔</span>
+    <h2 class="section-title">Core Attributes</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="stats-grid reveal">
+    <div class="stat-card">
+      <div class="stat-name-row"><span class="stat-name">SQL / T-SQL Mastery</span><span class="stat-value">95 / 100</span></div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:95%"></div></div>
+      <p class="stat-desc">12 years daily. Query optimization, execution plan analysis, complex stored procedures, grain debugging across 5,800-line codebases. The primary weapon.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-name-row"><span class="stat-name">Data Warehouse Design</span><span class="stat-value">85 / 100</span></div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:85%"></div></div>
+      <p class="stat-desc">Designed dimensional models from scratch. Built a warehouse serving 600+ users at Selene Finance. Full architecture ownership, start to finish.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-name-row"><span class="stat-name">ETL Pipeline Development</span><span class="stat-value">82 / 100</span></div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:82%"></div></div>
+      <p class="stat-desc">SSIS, modular Python pipelines, Snowflake + SQL Server cross-platform flows. 837 EDI enrichment, 1.1M row validations, parameterized multi-customer templates.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-name-row"><span class="stat-name">Data Investigation & Audit</span><span class="stat-value">88 / 100</span></div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:88%"></div></div>
+      <p class="stat-desc">Uncovered $180M+ in financial reporting bugs, $467K phantom overpayments, 7,500+ sync gaps, and 2,100+ anomalies. Root-causes logic failures in complex legacy code.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-name-row"><span class="stat-name">AI-Assisted Engineering</span><span class="stat-value">83 / 100</span></div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:83%"></div></div>
+      <p class="stat-desc">Daily Claude Code in production. MCP server integrations, onboarding playbooks, query generation, pipeline automation, and documentation. Early adopter leading team tooling adoption.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-name-row"><span class="stat-name">Python Scripting</span><span class="stat-value">65 / 100</span></div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:65%"></div></div>
+      <p class="stat-desc">Automation, pandas, regex-based NLP for parsing 15M+ emails and PDF attachments, interactive ECharts visualizations. AI-assisted development multiplies output.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-name-row"><span class="stat-name">Cloud / Azure + Snowflake</span><span class="stat-value">50 / 100</span></div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:50%"></div></div>
+      <p class="stat-desc">Production Snowflake work daily. Azure-hosted SQL environments and Databricks exposure. Building toward independent cloud architecture and DP-203 certification.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-name-row"><span class="stat-name">Problem Solving (INT)</span><span class="stat-value">92 / 100</span></div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:92%"></div></div>
+      <p class="stat-desc">Math degree + 12 years. War room escalations, zero-residual waterfall reconciliations across 45K+ disputes, cross-system sync gap detection. Finds the bug others miss.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<div class="section-divider"></div>
+<section id="equipment">
+  <div class="section-header">
+    <span class="section-icon">🛡</span>
+    <h2 class="section-title">Equipment & Arsenal</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="equipment-grid reveal">
+    <div class="gear-slot"><span class="gear-icon">🗄</span><span class="gear-name">SQL Server / T-SQL</span><span class="gear-tier tier-mastered">Mastered</span></div>
+    <div class="gear-slot"><span class="gear-icon">❄</span><span class="gear-name">Snowflake</span><span class="gear-tier tier-proficient">Proficient</span></div>
+    <div class="gear-slot"><span class="gear-icon">🔀</span><span class="gear-name">SSIS</span><span class="gear-tier tier-proficient">Proficient</span></div>
+    <div class="gear-slot"><span class="gear-icon">📊</span><span class="gear-name">SSRS</span><span class="gear-tier tier-proficient">Proficient</span></div>
+    <div class="gear-slot"><span class="gear-icon">🐍</span><span class="gear-name">Python</span><span class="gear-tier tier-proficient">Proficient</span></div>
+    <div class="gear-slot"><span class="gear-icon">📈</span><span class="gear-name">Power BI</span><span class="gear-tier tier-proficient">Proficient</span></div>
+    <div class="gear-slot"><span class="gear-icon">🤖</span><span class="gear-name">Claude Code / MCP</span><span class="gear-tier tier-proficient">Proficient</span></div>
+    <div class="gear-slot"><span class="gear-icon">🐙</span><span class="gear-name">Git</span><span class="gear-tier tier-proficient">Proficient</span></div>
+    <div class="gear-slot"><span class="gear-icon">☁</span><span class="gear-name">Azure</span><span class="gear-tier tier-apprentice">Apprentice</span></div>
+    <div class="gear-slot"><span class="gear-icon">⚡</span><span class="gear-name">Databricks</span><span class="gear-tier tier-apprentice">Apprentice</span></div>
+    <div class="gear-slot"><span class="gear-icon">🔧</span><span class="gear-name">dbt</span><span class="gear-tier tier-locked">Next Equip</span></div>
+    <div class="gear-slot"><span class="gear-icon">🌊</span><span class="gear-name">Airflow</span><span class="gear-tier tier-locked">Next Equip</span></div>
+  </div>
+  <p style="margin-top:1.5rem;font-size:.78rem;color:var(--ash);font-style:italic">🔴 Mastered &nbsp;·&nbsp; 🟡 Proficient &nbsp;·&nbsp; ⚫ Apprentice &nbsp;·&nbsp; 🔒 Next Equip</p>
+</section>
+
+<!-- QUEST LOG -->
+<div class="section-divider"></div>
+<section id="quests">
+  <div class="section-header">
+    <span class="section-icon">📜</span>
+    <h2 class="section-title">Quest Log — Projects</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="quest-list reveal">
+
+    <div class="quest-card featured">
+      <div class="quest-header">
+        <span class="quest-name">Healthcare IDR — $541M Payment Pipeline Audit</span>
+        <span class="quest-status status-active">⚡ Active Quest</span>
+      </div>
+      <div class="quest-impact">
+        <span class="impact-pill">$180M+ bugs found</span>
+        <span class="impact-pill">$541M validated</span>
+        <span class="impact-pill">1.1M rows</span>
+        <span class="impact-pill">10 customers</span>
+      </div>
+      <p class="quest-desc">Own production IDR reporting for 10 healthcare customers — 336K CPT lines, $91M tracked, modular Python pipeline with 837 EDI enrichment. Audited enterprise award payment pipelines and uncovered $180M+ in financial reporting bugs. Delivers monthly waterfall reconciliations across 45K+ disputes and 13 status buckets with computationally verified zero-residual balances.</p>
+      <div class="quest-tags">
+        <span class="quest-tag">SQL Server</span><span class="quest-tag">Snowflake</span><span class="quest-tag">Python</span>
+        <span class="quest-tag">837 EDI</span><span class="quest-tag">Claude Code</span><span class="quest-tag">MCP</span>
+      </div>
+    </div>
+
+    <div class="quest-card featured">
+      <div class="quest-header">
+        <span class="quest-name">Enterprise Data Catalog — 12K Objects in 2 Days</span>
+        <span class="quest-status status-complete">✓ Complete</span>
+      </div>
+      <div class="quest-impact">
+        <span class="impact-pill">12K objects</span>
+        <span class="impact-pill">455K columns</span>
+        <span class="impact-pill">10K lineage edges</span>
+        <span class="impact-pill">2 days</span>
+      </div>
+      <p class="quest-desc">Built a full enterprise data catalog with git-derived ownership and natural-language search. 12K objects, 455K columns, 10K lineage edges — from zero to production in two days using AI-assisted development.</p>
+      <div class="quest-tags">
+        <span class="quest-tag">Python</span><span class="quest-tag">SQL</span><span class="quest-tag">Git</span>
+        <span class="quest-tag">Claude Code</span><span class="quest-tag">NLP</span>
+      </div>
+    </div>
+
+    <div class="quest-card">
+      <div class="quest-header">
+        <span class="quest-name">15M+ Email & PDF Parsing Pipeline</span>
+        <span class="quest-status status-active">⚡ Active Quest</span>
+      </div>
+      <div class="quest-impact">
+        <span class="impact-pill">15M+ emails</span>
+        <span class="impact-pill">Regex NLP</span>
+        <span class="impact-pill">Snowflake native</span>
+      </div>
+      <p class="quest-desc">Parse 15M+ unstructured emails and PDF attachments into structured dispute data using regex-based NLP directly in Snowflake. Turns raw email noise into query-ready operational data.</p>
+      <div class="quest-tags">
+        <span class="quest-tag">Snowflake</span><span class="quest-tag">Regex</span><span class="quest-tag">NLP</span><span class="quest-tag">Python</span>
+      </div>
+    </div>
+
+    <div class="quest-card">
+      <div class="quest-header">
+        <span class="quest-name">Enterprise Data Warehouse — 600+ Users</span>
+        <span class="quest-status status-complete">✓ Complete</span>
+      </div>
+      <div class="quest-impact">
+        <span class="impact-pill">600+ users</span>
+        <span class="impact-pill">Full solo design</span>
+      </div>
+      <p class="quest-desc">Designed and built dimensional models from scratch at Selene Finance, supporting analytics for 600+ business users. SSRS reports with drill-down capabilities, automated nightly batch processing via SQL Server Agent and JAMS scheduler.</p>
+      <div class="quest-tags">
+        <span class="quest-tag">SQL Server</span><span class="quest-tag">SSRS</span><span class="quest-tag">Dimensional Modeling</span><span class="quest-tag">SSIS</span>
+      </div>
+    </div>
+
+    <div class="quest-card">
+      <div class="quest-header">
+        <span class="quest-name">Regulatory Reporting — CMS Healthcare Submissions</span>
+        <span class="quest-status status-complete">✓ Complete</span>
+      </div>
+      <p class="quest-desc">Developed and maintained regulatory reports for state and federal agencies including CMS submissions at CareSource. High-stakes, compliance-driven reporting with zero tolerance for errors in a regulated healthcare environment.</p>
+      <div class="quest-tags">
+        <span class="quest-tag">SQL Server</span><span class="quest-tag">SSIS</span><span class="quest-tag">Healthcare</span><span class="quest-tag">Compliance</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILL TREE -->
+<div class="section-divider"></div>
+<section id="skills">
+  <div class="section-header">
+    <span class="section-icon">🌿</span>
+    <h2 class="section-title">Skill Tree</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="skill-tree reveal">
+    <div class="skill-branch">
+      <div class="branch-title">⚔ Mastered Abilities</div>
+      <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">SQL / T-SQL (12 yrs)</span><span class="node-status">MAX</span></div>
+      <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">Query Optimization</span><span class="node-status">MAX</span></div>
+      <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">Dimensional Modeling</span><span class="node-status">✓</span></div>
+      <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">SSIS ETL Development</span><span class="node-status">✓</span></div>
+      <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">Data Audit & Investigation</span><span class="node-status">✓</span></div>
+      <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">AI-Assisted Dev (Claude Code)</span><span class="node-status">✓</span></div>
+      <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">Mentoring & Tech Influence</span><span class="node-status">✓</span></div>
+    </div>
+    <div class="skill-branch">
+      <div class="branch-title">⚡ In Progress & Locked</div>
+      <div class="skill-node"><div class="node-dot dot-learning"></div><span class="node-name">Azure Cloud Architecture</span><span class="node-status">Learning</span></div>
+      <div class="skill-node"><div class="node-dot dot-learning"></div><span class="node-name">dbt (Data Build Tool)</span><span class="node-status">Learning</span></div>
+      <div class="skill-node"><div class="node-dot dot-learning"></div><span class="node-name">Azure DP-203 Certification</span><span class="node-status">In Progress</span></div>
+      <div class="skill-node"><div class="node-dot dot-locked"></div><span class="node-name">Apache Airflow</span><span class="node-status">Locked</span></div>
+      <div class="skill-node"><div class="node-dot dot-locked"></div><span class="node-name">Spark / Databricks Advanced</span><span class="node-status">Locked</span></div>
+      <div class="skill-node"><div class="node-dot dot-locked"></div><span class="node-name">Terraform / IaC</span><span class="node-status">Locked</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LORE -->
+<div class="section-divider"></div>
+<section id="lore">
+  <div class="section-header">
+    <span class="section-icon">📖</span>
+    <h2 class="section-title">Character Lore</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="lore-layout reveal">
+    <div class="lore-box">
+      <div class="lore-text">
+        <p>Forged in the discipline of mathematics, this engineer did not find data — <strong>data found them.</strong> What began as a degree in pure mathematics became a 12-year journey into the architecture of information itself.</p>
+        <p>Through enterprise mortgage servicing and high-stakes healthcare dispute resolution, they have uncovered <strong>$180M+ in financial reporting bugs</strong>, designed warehouses serving 600+ users, parsed 15 million emails into structured intelligence, and become the person their teams come to when the data doesn't add up. No bootcamp shortcuts. <strong>The job was the classroom.</strong></p>
+        <p>Today, operating at the frontier of AI-assisted engineering — wielding Claude Code daily, shipping an enterprise data catalog in two days, and accelerating what a single engineer can deliver — this veteran is pushing toward the next tier: <strong>cloud certification, modern data stack mastery, and FAANG-caliber impact.</strong></p>
+      </div>
+    </div>
+    <div class="char-vitals">
+      <div class="vitals-title">Character Stats</div>
+      <div class="vital-row"><span class="vital-key">Class</span><span class="vital-val">Sr. Engineer II</span></div>
+      <div class="vital-row"><span class="vital-key">Level</span><span class="vital-val">64 / 100</span></div>
+      <div class="vital-row"><span class="vital-key">XP Since</span><span class="vital-val">June 2014</span></div>
+      <div class="vital-row"><span class="vital-key">Primary Stat</span><span class="vital-val">SQL (95)</span></div>
+      <div class="vital-row"><span class="vital-key">Background</span><span class="vital-val">Math · Self-Taught</span></div>
+      <div class="vital-row"><span class="vital-key">Domains</span><span class="vital-val">Finance · Healthcare</span></div>
+      <div class="vital-row"><span class="vital-key">Location</span><span class="vital-val">Prosper, TX</span></div>
+      <div class="vital-row"><span class="vital-key">Target</span><span class="vital-val">FAANG · Staff DE</span></div>
+      <div class="vital-row"><span class="vital-key">Status</span><span class="vital-val" style="color:#70c870">Open to Offers</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="section-divider"></div>
+<section id="contact">
+  <div class="section-header">
+    <span class="section-icon">⚡</span>
+    <h2 class="section-title">Recruit the Hero</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="contact-inner reveal">
+    <div class="contact-title">Open for Opportunities</div>
+    <p class="contact-sub">Senior Data Engineer seeking the next great quest. FAANG and top-tier companies welcome.</p>
+    <div class="contact-links">
+      <a href="mailto:khatiwadalomus@gmail.com" class="contact-link primary">✉ Send Scroll</a>
+      <a href="https://www.linkedin.com/in/lomusk/" target="_blank" class="contact-link">in LinkedIn</a>
+      <a href="https://github.com/ModulasKhwaait" target="_blank" class="contact-link">⌥ GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>CHARACTER SHEET v1.3 · LOMUS KHATIWADA · LEVEL 64 · BUILT WITH FIRE AND SQL · © 2026</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  const statBars = document.querySelectorAll('.stat-bar-fill');
+  const barObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const bar = e.target, target = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => { bar.style.width = target; }, 100);
+        barObserver.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.5 });
+  statBars.forEach(b => barObserver.observe(b));
+</script>
+</body>
+</html>

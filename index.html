@@ -138,6 +138,10 @@
     .contact-link:hover{background:rgba(212,168,67,.1);border-color:var(--gold);color:var(--gold)}
     .contact-link.primary{background:rgba(139,26,26,.3);border-color:var(--crimson)}
     .contact-link.primary:hover{background:rgba(139,26,26,.5);border-color:var(--ember)}
+    .contact-email{margin-top:1.5rem;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.6rem}
+    .contact-email-addr{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--parchment);user-select:all;overflow-wrap:anywhere}
+    .copy-btn{font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--ash);background:var(--stone-light);border:1px solid rgba(154,138,120,.3);border-radius:2px;padding:.2rem .6rem;cursor:pointer;transition:all .2s}
+    .copy-btn:hover{color:var(--gold);border-color:var(--gold)}
     footer{position:relative;z-index:1;text-align:center;padding:2rem;border-top:1px solid rgba(212,168,67,.1)}
     footer p{font-family:'Share Tech Mono',monospace;font-size:.62rem;color:rgba(154,138,120,.4);letter-spacing:.1em}
     .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
@@ -265,7 +269,7 @@
     <div class="stat-card">
       <div class="stat-name-row"><span class="stat-name">Cloud / Azure + Snowflake</span><span class="stat-value">50 / 100</span></div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:50%"></div></div>
-      <p class="stat-desc">Production Snowflake work daily. Azure-hosted SQL environments and Databricks exposure. Building toward independent cloud architecture.</p>
+      <p class="stat-desc">Production Snowflake work daily. Azure-hosted SQL environments and Databricks exposure.</p>
     </div>
     <div class="stat-card">
       <div class="stat-name-row"><span class="stat-name">Problem Solving (INT)</span><span class="stat-value">92 / 100</span></div>
@@ -441,9 +445,9 @@
       <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">Mentoring & Tech Influence</span><span class="node-status">✓</span></div>
     </div>
     <div class="skill-branch">
-      <div class="branch-title">⚡ In Progress & Locked</div>
-      <div class="skill-node"><div class="node-dot dot-learning"></div><span class="node-name">Azure Cloud Architecture</span><span class="node-status">Learning</span></div>
-      <div class="skill-node"><div class="node-dot dot-learning"></div><span class="node-name">dbt (Data Build Tool)</span><span class="node-status">Learning</span></div>
+      <div class="branch-title">🔒 Next Unlocks</div>
+      <div class="skill-node"><div class="node-dot dot-locked"></div><span class="node-name">Azure Cloud Architecture</span><span class="node-status">Locked</span></div>
+      <div class="skill-node"><div class="node-dot dot-locked"></div><span class="node-name">dbt (Data Build Tool)</span><span class="node-status">Locked</span></div>
       <div class="skill-node"><div class="node-dot dot-locked"></div><span class="node-name">Cloud Data Certification</span><span class="node-status">Locked</span></div>
       <div class="skill-node"><div class="node-dot dot-locked"></div><span class="node-name">Apache Airflow</span><span class="node-status">Locked</span></div>
       <div class="skill-node"><div class="node-dot dot-locked"></div><span class="node-name">Spark / Databricks Advanced</span><span class="node-status">Locked</span></div>
@@ -465,7 +469,7 @@
       <div class="lore-text">
         <p>Forged in the discipline of mathematics, this engineer did not find data — <strong>data found them.</strong> What began as a degree in pure mathematics became a 12-year journey into the architecture of information itself.</p>
         <p>Through enterprise mortgage servicing and high-stakes healthcare dispute resolution, they have <strong>traced financial-reporting bugs others missed</strong>, designed warehouses serving 600+ users, parsed 15 million emails into structured intelligence, and become the person their teams come to when the data doesn't add up. No bootcamp shortcuts. <strong>The job was the classroom.</strong></p>
-        <p>Today, operating at the frontier of AI-assisted engineering — wielding Claude Code daily, shipping an enterprise data catalog in two days, and accelerating what a single engineer can deliver — this veteran is pushing toward the next tier: <strong>cloud certification, modern data stack mastery, and solo cloud architecture builds.</strong></p>
+        <p>Today, operating at the frontier of AI-assisted engineering — wielding Claude Code daily, shipping an enterprise data catalog in two days, and accelerating what a single engineer can deliver — this veteran keeps the next tier in sight: <strong>cloud architecture and the modern data stack.</strong></p>
       </div>
     </div>
     <div class="char-vitals">
@@ -497,11 +501,15 @@
       <a href="https://www.linkedin.com/in/lomusk/" target="_blank" class="contact-link">in LinkedIn</a>
       <a href="https://github.com/ModulasKhwaait" target="_blank" class="contact-link">⌥ GitHub</a>
     </div>
+    <div class="contact-email">
+      <span class="contact-email-addr" id="email-addr">khatiwadalomus@gmail.com</span>
+      <button type="button" class="copy-btn" id="copy-email" aria-label="Copy email address">⧉ Copy</button>
+    </div>
   </div>
 </section>
 
 <footer>
-  <p>CHARACTER SHEET v1.4 · LOMUS KHATIWADA · LEVEL 64 · BUILT WITH FIRE AND SQL · © 2026</p>
+  <p>CHARACTER SHEET v1.4.1 · LOMUS KHATIWADA · LEVEL 64 · BUILT WITH FIRE AND SQL · © 2026</p>
 </footer>
 
 <script>
@@ -523,6 +531,21 @@
     });
   }, { threshold: 0.5 });
   statBars.forEach(b => barObserver.observe(b));
+
+  const copyBtn = document.getElementById('copy-email');
+  copyBtn.addEventListener('click', async () => {
+    const addr = document.getElementById('email-addr').textContent;
+    try {
+      await navigator.clipboard.writeText(addr);
+      copyBtn.textContent = '✓ Copied';
+    } catch {
+      const r = document.createRange();
+      r.selectNodeContents(document.getElementById('email-addr'));
+      const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      copyBtn.textContent = 'Press Ctrl+C';
+    }
+    setTimeout(() => { copyBtn.textContent = '⧉ Copy'; }, 2000);
+  });
 </script>
 </body>
 </html>

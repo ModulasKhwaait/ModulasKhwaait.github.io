@@ -109,6 +109,7 @@
     .skill-node:last-child{border-bottom:none}
     .node-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
     .dot-mastered{background:var(--ember);box-shadow:0 0 6px rgba(196,74,26,.6)}
+    .dot-proficient{background:var(--gold);box-shadow:0 0 6px rgba(212,168,67,.4)}
     .dot-learning{background:var(--gold);box-shadow:0 0 6px rgba(212,168,67,.4);animation:dotPulse 2s infinite}
     .dot-locked{background:var(--stone-light);border:1px solid var(--ash)}
     @keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.4}}
@@ -171,10 +172,6 @@
   <!-- Impact stats banner -->
   <div class="impact-row">
     <div class="impact-stat">
-      <span class="impact-num">12 yrs</span>
-      <span class="impact-lbl">XP Earned</span>
-    </div>
-    <div class="impact-stat">
       <span class="impact-num">15M+</span>
       <span class="impact-lbl">Documents Parsed</span>
     </div>
@@ -208,16 +205,16 @@
       </defs>
     </svg>
     <div class="level-orb-text">
-      <span class="level-label">Level</span>
-      <span class="level-number">64</span>
-      <span class="level-max">/ 100</span>
+      <span class="level-label">Years XP</span>
+      <span class="level-number">12</span>
+      <span class="level-max">Senior</span>
     </div>
   </div>
 
   <div class="xp-section">
     <div class="xp-label-row">
-      <span class="xp-label">⚡ XP — Senior Tier</span>
-      <span class="xp-label">LVL 65 ▶</span>
+      <span class="xp-label">⚡ Level 64 — Senior Tier</span>
+      <span class="xp-label">Cloud depth growing ▶</span>
     </div>
     <div class="xp-bar-track"><div class="xp-bar-fill" style="width:40%"></div></div>
     <div class="xp-next">Next milestone: Cloud Certification · dbt Mastery · Solo cloud architecture build</div>
@@ -237,42 +234,42 @@
   </div>
   <div class="stats-grid reveal">
     <div class="stat-card">
-      <div class="stat-name-row"><span class="stat-name">SQL / T-SQL Mastery</span><span class="stat-value">95 / 100</span></div>
+      <div class="stat-name-row"><span class="stat-name">SQL / T-SQL Mastery</span><span class="gear-tier tier-mastered">Mastered</span></div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:95%"></div></div>
       <p class="stat-desc">12 years daily. Query optimization, execution plan analysis, complex stored procedures, grain debugging across large legacy stored procedures. The primary weapon.</p>
     </div>
     <div class="stat-card">
-      <div class="stat-name-row"><span class="stat-name">Data Warehouse Design</span><span class="stat-value">85 / 100</span></div>
+      <div class="stat-name-row"><span class="stat-name">Data Warehouse Design</span><span class="gear-tier tier-mastered">Mastered</span></div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:85%"></div></div>
       <p class="stat-desc">Designed dimensional models from scratch. Built a warehouse serving 600+ users at Selene Finance. Full architecture ownership, start to finish.</p>
     </div>
     <div class="stat-card">
-      <div class="stat-name-row"><span class="stat-name">ETL Pipeline Development</span><span class="stat-value">82 / 100</span></div>
+      <div class="stat-name-row"><span class="stat-name">ETL Pipeline Development</span><span class="gear-tier tier-mastered">Mastered</span></div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:82%"></div></div>
       <p class="stat-desc">SSIS, modular Python pipelines, Snowflake + SQL Server cross-platform flows. 837 EDI enrichment, row-level validations at scale, parameterized multi-customer templates.</p>
     </div>
     <div class="stat-card">
-      <div class="stat-name-row"><span class="stat-name">Data Investigation & Audit</span><span class="stat-value">88 / 100</span></div>
+      <div class="stat-name-row"><span class="stat-name">Data Investigation & Audit</span><span class="gear-tier tier-mastered">Mastered</span></div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:88%"></div></div>
       <p class="stat-desc">Multi-source reconciliation that surfaces phantom overpayments, cross-system sync gaps and orphan records. Root-causes logic failures in complex legacy code.</p>
     </div>
     <div class="stat-card">
-      <div class="stat-name-row"><span class="stat-name">AI-Assisted Engineering</span><span class="stat-value">83 / 100</span></div>
+      <div class="stat-name-row"><span class="stat-name">AI-Assisted Engineering</span><span class="gear-tier tier-proficient">Proficient</span></div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:83%"></div></div>
       <p class="stat-desc">Daily Claude Code in production. MCP server integrations, onboarding playbooks, query generation, pipeline automation, and documentation. Early adopter leading team tooling adoption.</p>
     </div>
     <div class="stat-card">
-      <div class="stat-name-row"><span class="stat-name">Python Scripting</span><span class="stat-value">65 / 100</span></div>
+      <div class="stat-name-row"><span class="stat-name">Python Scripting</span><span class="gear-tier tier-proficient">Proficient</span></div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:65%"></div></div>
       <p class="stat-desc">Automation, pandas, regex-based NLP for parsing 15M+ emails and PDF attachments, interactive ECharts visualizations. AI-assisted development multiplies output.</p>
     </div>
     <div class="stat-card">
-      <div class="stat-name-row"><span class="stat-name">Cloud / Azure + Snowflake</span><span class="stat-value">50 / 100</span></div>
+      <div class="stat-name-row"><span class="stat-name">Cloud / Azure + Snowflake</span><span class="gear-tier tier-apprentice">Apprentice</span></div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:50%"></div></div>
       <p class="stat-desc">Production Snowflake work daily. Azure-hosted SQL environments and Databricks exposure.</p>
     </div>
     <div class="stat-card">
-      <div class="stat-name-row"><span class="stat-name">Problem Solving (INT)</span><span class="stat-value">92 / 100</span></div>
+      <div class="stat-name-row"><span class="stat-name">Problem Solving (INT)</span><span class="gear-tier tier-mastered">Mastered</span></div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:92%"></div></div>
       <p class="stat-desc">Math degree + 12 years. War room escalations, zero-residual waterfall reconciliations, cross-system sync gap detection. Finds the bug others miss.</p>
     </div>
@@ -293,7 +290,7 @@
     <div class="gear-slot"><span class="gear-icon">🔀</span><span class="gear-name">SSIS</span><span class="gear-tier tier-proficient">Proficient</span></div>
     <div class="gear-slot"><span class="gear-icon">📊</span><span class="gear-name">SSRS</span><span class="gear-tier tier-proficient">Proficient</span></div>
     <div class="gear-slot"><span class="gear-icon">🐍</span><span class="gear-name">Python</span><span class="gear-tier tier-proficient">Proficient</span></div>
-    <div class="gear-slot"><span class="gear-icon">📈</span><span class="gear-name">Power BI</span><span class="gear-tier tier-proficient">Proficient</span></div>
+    <div class="gear-slot"><span class="gear-icon">📈</span><span class="gear-name">Power BI</span><span class="gear-tier tier-apprentice">Apprentice</span></div>
     <div class="gear-slot"><span class="gear-icon">🤖</span><span class="gear-name">Claude Code / MCP</span><span class="gear-tier tier-proficient">Proficient</span></div>
     <div class="gear-slot"><span class="gear-icon">🐙</span><span class="gear-name">Git</span><span class="gear-tier tier-proficient">Proficient</span></div>
     <div class="gear-slot"><span class="gear-icon">☁</span><span class="gear-name">Azure</span><span class="gear-tier tier-apprentice">Apprentice</span></div>
@@ -435,14 +432,14 @@
   </div>
   <div class="skill-tree reveal">
     <div class="skill-branch">
-      <div class="branch-title">⚔ Mastered Abilities</div>
+      <div class="branch-title">⚔ Core Abilities</div>
       <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">SQL / T-SQL (12 yrs)</span><span class="node-status">MAX</span></div>
       <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">Query Optimization</span><span class="node-status">MAX</span></div>
       <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">Dimensional Modeling</span><span class="node-status">✓</span></div>
       <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">SSIS ETL Development</span><span class="node-status">✓</span></div>
       <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">Data Audit & Investigation</span><span class="node-status">✓</span></div>
-      <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">AI-Assisted Dev (Claude Code)</span><span class="node-status">✓</span></div>
       <div class="skill-node"><div class="node-dot dot-mastered"></div><span class="node-name">Mentoring & Tech Influence</span><span class="node-status">✓</span></div>
+      <div class="skill-node"><div class="node-dot dot-proficient"></div><span class="node-name">AI-Assisted Dev (Claude Code)</span><span class="node-status">Proficient</span></div>
     </div>
     <div class="skill-branch">
       <div class="branch-title">🔒 Next Unlocks</div>
@@ -475,7 +472,7 @@
     <div class="char-vitals">
       <div class="vitals-title">Character Stats</div>
       <div class="vital-row"><span class="vital-key">Class</span><span class="vital-val">Sr. Engineer II</span></div>
-      <div class="vital-row"><span class="vital-key">Level</span><span class="vital-val">64 / 100</span></div>
+      <div class="vital-row"><span class="vital-key">Tier</span><span class="vital-val">Senior · Lvl 64</span></div>
       <div class="vital-row"><span class="vital-key">XP Since</span><span class="vital-val">June 2014</span></div>
       <div class="vital-row"><span class="vital-key">Primary Stat</span><span class="vital-val">SQL (95)</span></div>
       <div class="vital-row"><span class="vital-key">Background</span><span class="vital-val">Math · Self-Taught</span></div>
@@ -509,7 +506,7 @@
 </section>
 
 <footer>
-  <p>CHARACTER SHEET v1.4.1 · LOMUS KHATIWADA · LEVEL 64 · BUILT WITH FIRE AND SQL · © 2026</p>
+  <p>CHARACTER SHEET v1.5 · LOMUS KHATIWADA · LEVEL 64 · BUILT WITH FIRE AND SQL · © 2026</p>
 </footer>
 
 <script>
